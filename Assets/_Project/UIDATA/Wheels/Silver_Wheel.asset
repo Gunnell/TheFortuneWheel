@@ -21,15 +21,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 397d56e1650e9485fbae21db2e0cf95c, type: 2}
   - {fileID: 11400000, guid: 00fd1eb77f6514615ad5a702c71d3ac6, type: 2}
   - {fileID: 11400000, guid: 4f5c827e784d0459eb269a3fc1b8ec56, type: 2}
-  - {fileID: 11400000, guid: 61534de8dc0d04e9888199b7ca98c5fb, type: 2}
   - {fileID: 11400000, guid: 5313fdf80761e4996b608c4e1d427792, type: 2}
-  - {fileID: 11400000, guid: 08e2bf5cd553b4620a9cf5977316a2cd, type: 2}
   - {fileID: 11400000, guid: f112a5daa69c84f7fb59c5c663974989, type: 2}
   - {fileID: 11400000, guid: 46841a7125a6341ecad3c061a64e9fc6, type: 2}
-  - {fileID: 11400000, guid: 0842309248924428fb437a055c40a983, type: 2}
   - {fileID: 11400000, guid: b9a3445d131c44f2b9dc7be66dc793cf, type: 2}
-  - {fileID: 11400000, guid: a55c9e739c9da47fe9b22a33768181e8, type: 2}
-  - {fileID: 11400000, guid: d12c6014e59604440a15afb227891d4c, type: 2}
   - {fileID: 11400000, guid: f015dbaf3758e4e45ab39fef47e49173, type: 2}
   _hasBomb: 0
   _bombReward: {fileID: 0}

@@ -2993,7 +2993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0caef9cde8fd430082e1d8a12330e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wheel: {fileID: 11400000, guid: a847d1d96f5b64fe5be9fa16828ecdd0, type: 2}
+  _wheel: {fileID: 11400000, guid: 9e42514a891814137909099e6b0e511d, type: 2}
   _slots:
   - {fileID: 497084645}
   - {fileID: 1484237686}
@@ -4108,7 +4108,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 2
-  m_Spacing: -80
+  m_Spacing: -90
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -5221,7 +5221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 165, y: -145}
+  m_AnchoredPosition: {x: 165, y: -135}
   m_SizeDelta: {x: 330, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915037073
