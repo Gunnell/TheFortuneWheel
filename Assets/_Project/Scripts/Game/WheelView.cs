@@ -17,11 +17,13 @@ namespace FortuneWheel
         [SerializeField, HideInInspector] private Image _indicatorImage;
         [SerializeField] private float _spinDuration = 4f;
         [SerializeField] private int _spinTurns = 5;
+        [SerializeField] private float _growthPerZone = 0.15f;
 
         private readonly WheelGenerator _generator = new WheelGenerator();
         private readonly System.Random _random = new System.Random();
         private List<WheelSlice> _current;
         private bool _isSpinning;
+        private int _zone = 1;
 
         public event Action<WheelSlice, WheelSlotView> Landed;
         public bool IsSpinning => _isSpinning;
@@ -38,9 +40,10 @@ namespace FortuneWheel
             ShowNewWheel();
         }
 
-        public void ShowWheel(WheelData wheel)
+        public void ShowWheel(WheelData wheel, int zone)
         {
             _wheel = wheel;
+            _zone = zone;
             ShowNewWheel();
         }
 
@@ -48,7 +51,7 @@ namespace FortuneWheel
         {
             if (_wheel == null || _slots == null) return;
 
-            _current = _generator.Generate(_wheel, _random);
+            _current = _generator.Generate(_wheel, _zone, _growthPerZone, _random);
 
             for (int i = 0; i < _slots.Length && i < _current.Count; i++)
                 _slots[i].Show(_current[i]);

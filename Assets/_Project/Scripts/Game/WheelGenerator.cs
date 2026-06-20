@@ -19,7 +19,7 @@ namespace FortuneWheel
 
     public class WheelGenerator
     {
-        public List<WheelSlice> Generate(WheelData wheel, Random random)
+        public List<WheelSlice> Generate(WheelData wheel, int zone, float growthPerZone, Random random)
         {
             var pool = new List<RewardData>();
             foreach (RewardData reward in wheel.Pool)
@@ -35,7 +35,7 @@ namespace FortuneWheel
             for (int i = 0; i < WheelData.SlotCount; i++)
             {
                 RewardData reward = pool.Count == 0 ? null : pool[i % pool.Count];
-                int amount = reward != null ? RollAmount(reward, random) : 0;
+                int amount = reward != null ? RollAmount(reward, zone, growthPerZone, random) : 0;
                 slices.Add(new WheelSlice(reward, amount, false));
             }
 
@@ -48,10 +48,12 @@ namespace FortuneWheel
             return slices;
         }
 
-        private static int RollAmount(RewardData reward, Random random)
+        private static int RollAmount(RewardData reward, int zone, float growthPerZone, Random random)
         {
             int hi = Math.Max(reward.MinAmount, reward.MaxAmount);
-            return random.Next(reward.MinAmount, hi + 1);
+            int baseRoll = random.Next(reward.MinAmount, hi + 1);
+            double scaled = baseRoll * (1.0 + (zone - 1) * growthPerZone);
+            return Math.Max(1, (int)Math.Round(scaled));
         }
     }
 }

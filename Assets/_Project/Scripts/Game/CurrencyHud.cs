@@ -28,6 +28,14 @@ namespace FortuneWheel
             Refresh();
         }
 
+        public bool TrySpendCoin(int amount)
+        {
+            if (amount <= 0 || _coin < amount) return false;
+            _coin -= amount;
+            Refresh();
+            return true;
+        }
+
         private void Refresh()
         {
             if (_cashText != null) _cashText.text = _cash.ToString("N0");

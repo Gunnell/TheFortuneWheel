@@ -1652,6 +1652,7 @@ GameObject:
   - component: {fileID: 763212332}
   - component: {fileID: 763212334}
   - component: {fileID: 763212333}
+  - component: {fileID: 763212335}
   m_Layer: 5
   m_Name: ui_panel_zonebar
   m_TagString: Untagged
@@ -1720,6 +1721,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 763212331}
   m_CullTransparentMesh: 1
+--- !u!114 &763212335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763212331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a019de10f8cac43848e3562d249f4071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _indicator: {fileID: 620830541}
+  _indicatorImage: {fileID: 620830542}
+  _cells: {fileID: 1249929597}
+  _normalSprite: {fileID: 21300000, guid: b226f1de2da5f456195bc520bde382a5, type: 3}
+  _safeSprite: {fileID: 21300000, guid: bfc643c14c49b43a2bd1738f56dd072b, type: 3}
+  _superSprite: {fileID: 21300000, guid: f93cbd4be116648f797e8c598cffd7b4, type: 3}
+  _normalColor: {r: 1, g: 1, b: 1, a: 1}
+  _safeColor: {r: 0.46, g: 0.89, b: 0.17, a: 1}
+  _superColor: {r: 1, g: 0.78, b: 0.16, a: 1}
+  _currentScale: 1.3
+  _slideDuration: 0.4
 --- !u!1 &795792314
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,6 +3029,8 @@ MonoBehaviour:
   - {fileID: 2141084079}
   _rotor: {fileID: 1687656105}
   _indicator: {fileID: 1446947526}
+  _baseImage: {fileID: 1775938648}
+  _indicatorImage: {fileID: 1446947527}
   _spinDuration: 4
   _spinTurns: 3
 --- !u!114 &1245096146 stripped
@@ -4072,6 +4098,7 @@ GameObject:
   - component: {fileID: 1496970987}
   - component: {fileID: 1496970989}
   - component: {fileID: 1496970988}
+  - component: {fileID: 1496970990}
   m_Layer: 5
   m_Name: ui_currency_block
   m_TagString: Untagged
@@ -4141,6 +4168,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1496970990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496970986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475944ff8068a4a64a66cfdd10ca7bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cashText: {fileID: 1290130384}
+  _coinText: {fileID: 2076676491}
 --- !u!1001 &1523095820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5419,6 +5460,12 @@ MonoBehaviour:
   _exitButton: {fileID: 1690492752}
   _wheel: {fileID: 1228441788}
   _inventory: {fileID: 1400115424}
+  _hud: {fileID: 1496970990}
+  _normalWheel: {fileID: 11400000, guid: d28ad412cd96a4685abe520f38edebb9, type: 2}
+  _safeWheel: {fileID: 11400000, guid: 9e42514a891814137909099e6b0e511d, type: 2}
+  _superWheel: {fileID: 11400000, guid: 7fb078358d45744648e2fd17d522980e, type: 2}
+  _advanceDelay: 0.6
+  _zoneBar: {fileID: 763212335}
 --- !u!1 &1923974165
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,7 +5899,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 376349774689352893, guid: 538430c061aff400d9c30a5fdfe9bb65, type: 3}
       propertyPath: m_fontSize
-      value: 90
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 376349774689352893, guid: 538430c061aff400d9c30a5fdfe9bb65, type: 3}
       propertyPath: m_fontColor.b
@@ -5868,7 +5915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 376349774689352893, guid: 538430c061aff400d9c30a5fdfe9bb65, type: 3}
       propertyPath: m_fontSizeBase
-      value: 90
+      value: 66
       objectReference: {fileID: 0}
     - target: {fileID: 376349774689352893, guid: 538430c061aff400d9c30a5fdfe9bb65, type: 3}
       propertyPath: m_fontColor32.rgba
