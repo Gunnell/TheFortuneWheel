@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: smg_card_std
   _icon: {fileID: 21300000, guid: c87b8704f2b84488885412deabe6d81c, type: 3}
+  _minAmount: 1
+  _maxAmount: 20

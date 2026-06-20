@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: shotgun_card_std
   _icon: {fileID: 21300000, guid: da39e5315e92d4adeb4fbbad8c0d117f, type: 3}
+  _minAmount: 1
+  _maxAmount: 15

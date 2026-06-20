@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: molotov_bronze
   _icon: {fileID: 21300000, guid: db98fd48023ed42fa94b80bc68349c6d, type: 3}
+  _minAmount: 1
+  _maxAmount: 3

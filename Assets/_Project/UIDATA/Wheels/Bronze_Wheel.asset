@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Bronze_Wheel
   m_EditorClassIdentifier: 
   _tier: 0
+  _baseSprite: {fileID: 21300000, guid: 2080a72d4dddd47a89e8f6e66b808de9, type: 3}
+  _indicatorSprite: {fileID: 21300000, guid: 560ad67ecd67a48679de82c3acf652dd, type: 3}
   _pool:
   - {fileID: 11400000, guid: 0a384adebe1c445e088a546a0de6b5d5, type: 2}
   - {fileID: 11400000, guid: ec279dc5b16224689a0ea228628dc111, type: 2}

@@ -25,7 +25,10 @@ public class BackgroundCoverFitter : MonoBehaviour
     private void OnValidate()
     {
         Cache();
-        Fit();
+        UnityEditor.EditorApplication.delayCall += () =>
+        {
+            if (this != null) Fit();
+        };
     }
 #endif
 

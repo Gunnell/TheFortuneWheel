@@ -11,6 +11,8 @@ namespace FortuneWheel
         public const int SlotCount = 8;
 
         [SerializeField] private WheelTier _tier = WheelTier.Bronze;
+        [SerializeField] private Sprite _baseSprite;
+        [SerializeField] private Sprite _indicatorSprite;
         [SerializeField] private List<RewardData> _pool = new List<RewardData>();
 
         [Header("Bomb")]
@@ -18,6 +20,8 @@ namespace FortuneWheel
         [SerializeField] private RewardData _bombReward;
 
         public WheelTier Tier => _tier;
+        public Sprite BaseSprite => _baseSprite;
+        public Sprite IndicatorSprite => _indicatorSprite;
         public IReadOnlyList<RewardData> Pool => _pool;
         public bool HasBomb => _hasBomb;
         public RewardData BombReward => _bombReward;

@@ -10,6 +10,8 @@ namespace FortuneWheel
         [SerializeField, HideInInspector] private Image _icon;
         [SerializeField, HideInInspector] private TMP_Text _amount;
 
+        public Transform IconTransform => _icon != null ? _icon.transform : transform;
+
         public void Show(WheelSlice slice)
         {
             if (_icon != null)

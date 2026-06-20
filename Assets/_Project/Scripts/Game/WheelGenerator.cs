@@ -19,12 +19,25 @@ namespace FortuneWheel
 
     public class WheelGenerator
     {
-        public List<WheelSlice> Generate(WheelData wheel, int amount, Random random)
+        public List<WheelSlice> Generate(WheelData wheel, Random random)
         {
-            var slices = new List<WheelSlice>(WheelData.SlotCount);
+            var pool = new List<RewardData>();
+            foreach (RewardData reward in wheel.Pool)
+                if (reward != null && !pool.Contains(reward)) pool.Add(reward);
 
+            for (int i = pool.Count - 1; i > 0; i--)
+            {
+                int j = random.Next(i + 1);
+                (pool[i], pool[j]) = (pool[j], pool[i]);
+            }
+
+            var slices = new List<WheelSlice>(WheelData.SlotCount);
             for (int i = 0; i < WheelData.SlotCount; i++)
-                slices.Add(new WheelSlice(PickReward(wheel, random), amount, false));
+            {
+                RewardData reward = pool.Count == 0 ? null : pool[i % pool.Count];
+                int amount = reward != null ? RollAmount(reward, random) : 0;
+                slices.Add(new WheelSlice(reward, amount, false));
+            }
 
             if (wheel.HasBomb && wheel.BombReward != null)
             {
@@ -35,10 +48,10 @@ namespace FortuneWheel
             return slices;
         }
 
-        private static RewardData PickReward(WheelData wheel, Random random)
+        private static int RollAmount(RewardData reward, Random random)
         {
-            var pool = wheel.Pool;
-            return pool.Count == 0 ? null : pool[random.Next(pool.Count)];
+            int hi = Math.Max(reward.MinAmount, reward.MaxAmount);
+            return random.Next(reward.MinAmount, hi + 1);
         }
     }
 }

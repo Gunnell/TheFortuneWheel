@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Golden_Wheel
   m_EditorClassIdentifier: 
   _tier: 2
+  _baseSprite: {fileID: 21300000, guid: db778f4246aa14a5f81754eacc353fb6, type: 3}
+  _indicatorSprite: {fileID: 21300000, guid: e4fc017ec5c9d42258cc1575decda910, type: 3}
   _pool:
   - {fileID: 11400000, guid: bc6bdfcb0780d4f6a82b4c3f7001cc9f, type: 2}
   - {fileID: 11400000, guid: 9d468f2c17d56441aa7153a37da2d1ef, type: 2}

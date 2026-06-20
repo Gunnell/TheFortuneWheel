@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Silver_Wheel
   m_EditorClassIdentifier: 
   _tier: 1
+  _baseSprite: {fileID: 21300000, guid: c506f59ebfe354c3594eab416acfa9c4, type: 3}
+  _indicatorSprite: {fileID: 21300000, guid: 63a6880390dab4156b4efcb3cc9de507, type: 3}
   _pool:
   - {fileID: 11400000, guid: f015dbaf3758e4e45ab39fef47e49173, type: 2}
   - {fileID: 11400000, guid: 0a384adebe1c445e088a546a0de6b5d5, type: 2}

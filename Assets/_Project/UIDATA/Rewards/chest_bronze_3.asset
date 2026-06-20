@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: chest_bronze
   _icon: {fileID: 21300000, guid: dd4d01dab4b06444da335a50cc49a598, type: 3}
+  _minAmount: 1
+  _maxAmount: 3

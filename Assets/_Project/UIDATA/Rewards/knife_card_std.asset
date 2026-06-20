@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: knife_card_std
   _icon: {fileID: 21300000, guid: 5bb8ed521da2a45eebdc253200581f7b, type: 3}
+  _minAmount: 1
+  _maxAmount: 13

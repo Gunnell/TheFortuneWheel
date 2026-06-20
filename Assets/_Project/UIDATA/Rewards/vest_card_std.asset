@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _displayName: vest_card_std
   _icon: {fileID: 21300000, guid: 1d1419b42a5bc4a879cca7a0fff88844, type: 3}
+  _minAmount: 1
+  _maxAmount: 20
