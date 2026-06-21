@@ -14,7 +14,6 @@ namespace FortuneWheel
         [SerializeField, HideInInspector] private TMP_Text _cashText;
         [SerializeField, HideInInspector] private TMP_Text _coinText;
         [SerializeField, Range(0f, 1f)] private float _disabledReviveAlpha = 0.45f;
-        [SerializeField, Range(0.5f, 1f)] private float _disabledReviveScale = 0.88f;
 
         private CanvasGroup _reviveGroup;
 
@@ -45,8 +44,8 @@ namespace FortuneWheel
         private void SetReviveAffordable(bool canAfford)
         {
             if (_reviveButton == null) return;
+
             _reviveButton.interactable = canAfford;
-            _reviveButton.transform.localScale = Vector3.one * (canAfford ? 1f : _disabledReviveScale);
 
             if (_reviveGroup == null)
             {

@@ -2153,7 +2153,6 @@ MonoBehaviour:
   _cashText: {fileID: 0}
   _coinText: {fileID: 0}
   _disabledReviveAlpha: 0.45
-  _disabledReviveScale: 0.88
 --- !u!1 &787220212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4369,7 +4368,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1921.0411, y: 1081.1602}
+  m_SizeDelta: {x: 2558.6396, y: 1440}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1311324572
 MonoBehaviour:
