@@ -15,16 +15,24 @@ namespace FortuneWheel
         [SerializeField] private WheelData _safeWheel;
         [SerializeField] private WheelData _superWheel;
         [SerializeField] private float _advanceDelay = 0.6f;
+        [SerializeField] private float _restartDelay = 1f;
         [SerializeField] private int _baseReviveCost = 50;
         [SerializeField] private ZoneBar _zoneBar;
 
         private int _zone = 1;
         private int _reviveCount;
 
+        private bool CanLeave =>
+            _wheel != null && !_wheel.IsSpinning && Zones.Classify(_zone) != ZoneType.Normal;
+
         private void OnEnable()
         {
             if (_exitButton != null) _exitButton.onClick.AddListener(OnExit);
-            if (_wheel != null) _wheel.Landed += OnLanded;
+            if (_wheel != null)
+            {
+                _wheel.Landed += OnLanded;
+                _wheel.SpinStarted += OnSpinStarted;
+            }
             if (_failWindow != null)
             {
                 _failWindow.Revive += OnRevive;
@@ -35,7 +43,11 @@ namespace FortuneWheel
         private void OnDisable()
         {
             if (_exitButton != null) _exitButton.onClick.RemoveListener(OnExit);
-            if (_wheel != null) _wheel.Landed -= OnLanded;
+            if (_wheel != null)
+            {
+                _wheel.Landed -= OnLanded;
+                _wheel.SpinStarted -= OnSpinStarted;
+            }
             if (_failWindow != null)
             {
                 _failWindow.Revive -= OnRevive;
@@ -47,6 +59,7 @@ namespace FortuneWheel
         {
             _zone = 1;
             _reviveCount = 0;
+            if (_failWindow != null) _failWindow.Hide();
             ShowZone();
         }
 
@@ -55,18 +68,36 @@ namespace FortuneWheel
             if (slice.IsBomb)
             {
                 OnBomb();
+                RefreshExitButton();
                 return;
             }
 
             CancelInvoke(nameof(AdvanceZone));
             Invoke(nameof(AdvanceZone), _advanceDelay);
+            RefreshExitButton();
+        }
+
+        private void OnSpinStarted() => RefreshExitButton();
+
+        private void RefreshExitButton()
+        {
+            if (_exitButton != null) _exitButton.interactable = CanLeave;
         }
 
         private void OnBomb()
         {
-            if (_failWindow == null) return;
-            int cost = ReviveCost();
-            _failWindow.Show(cost, _hud != null && _hud.Coin >= cost);
+            if (_failWindow != null)
+            {
+                int cost = ReviveCost();
+                int cash = _inventory != null ? _inventory.HaulAmount(RewardKind.Cash) : 0;
+                int coin = _inventory != null ? _inventory.HaulAmount(RewardKind.Coin) : 0;
+                _failWindow.Show(cost, _hud != null && _hud.Coin >= cost, cash, coin);
+                return;
+            }
+
+            CancelInvoke(nameof(AdvanceZone));
+            CancelInvoke(nameof(RestartRun));
+            Invoke(nameof(RestartRun), _restartDelay);
         }
 
         private int ReviveCost() => _baseReviveCost * (_reviveCount + 1);
@@ -82,8 +113,13 @@ namespace FortuneWheel
 
         private void OnLeave()
         {
-            if (_inventory != null) _inventory.Clear();
             if (_failWindow != null) _failWindow.Hide();
+            RestartRun();
+        }
+
+        private void RestartRun()
+        {
+            if (_inventory != null) _inventory.Clear();
             _reviveCount = 0;
             _zone = 1;
             ShowZone();
@@ -100,6 +136,7 @@ namespace FortuneWheel
             WheelData wheel = WheelFor(Zones.Classify(_zone));
             if (_wheel != null && wheel != null) _wheel.ShowWheel(wheel, _zone);
             if (_zoneBar != null) _zoneBar.SetZone(_zone);
+            RefreshExitButton();
         }
 
         private WheelData WheelFor(ZoneType type)
@@ -114,7 +151,7 @@ namespace FortuneWheel
 
         private void OnExit()
         {
-            if (_wheel == null || _wheel.IsSpinning) return;
+            if (!CanLeave) return;
 
             if (_inventory != null) _inventory.CollectInto(_hud);
             CancelInvoke(nameof(AdvanceZone));
@@ -131,7 +168,7 @@ namespace FortuneWheel
             if (_inventory == null) _inventory = FindObjectOfType<Inventory>();
             if (_hud == null) _hud = FindObjectOfType<CurrencyHud>();
             if (_zoneBar == null) _zoneBar = FindObjectOfType<ZoneBar>();
-            if (_failWindow == null) _failWindow = FindObjectOfType<FailWindow>();
+            if (_failWindow == null) _failWindow = FindObjectOfType<FailWindow>(true);
         }
 #endif
     }

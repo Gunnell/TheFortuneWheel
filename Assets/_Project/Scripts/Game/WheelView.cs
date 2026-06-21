@@ -26,6 +26,7 @@ namespace FortuneWheel
         private int _zone = 1;
 
         public event Action<WheelSlice, WheelSlotView> Landed;
+        public event Action SpinStarted;
         public bool IsSpinning => _isSpinning;
 
         private void Start()
@@ -51,12 +52,35 @@ namespace FortuneWheel
         {
             if (_wheel == null || _slots == null) return;
 
-            _current = _generator.Generate(_wheel, _zone, _growthPerZone, _random);
+            _current = _generator.Generate(_wheel, _zone, _growthPerZone, _random, TopSlotIndex());
 
             for (int i = 0; i < _slots.Length && i < _current.Count; i++)
                 _slots[i].Show(_current[i]);
 
             ApplySkin();
+        }
+
+        private int TopSlotIndex()
+        {
+            if (_rotor == null || _slots == null || _slots.Length == 0) return -1;
+
+            float rotorZ = _rotor.localEulerAngles.z;
+            int best = 0;
+            float bestDistance = float.MaxValue;
+
+            for (int i = 0; i < _slots.Length; i++)
+            {
+                if (_slots[i] == null) continue;
+                float angle = Mathf.Repeat(rotorZ + _slots[i].transform.localEulerAngles.z, 360f);
+                float distance = Mathf.Min(angle, 360f - angle);
+                if (distance < bestDistance)
+                {
+                    bestDistance = distance;
+                    best = i;
+                }
+            }
+
+            return best;
         }
 
         private void ApplySkin()
@@ -77,6 +101,7 @@ namespace FortuneWheel
             float endZ = current + _spinTurns * 360f + align;
 
             _isSpinning = true;
+            SpinStarted?.Invoke();
             _rotor.DOLocalRotate(new Vector3(0f, 0f, endZ), _spinDuration, RotateMode.FastBeyond360)
                   .SetEase(Ease.OutQuart)
                   .OnComplete(() =>

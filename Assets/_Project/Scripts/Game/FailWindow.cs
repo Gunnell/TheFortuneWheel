@@ -11,11 +11,11 @@ namespace FortuneWheel
         [SerializeField, HideInInspector] private Button _reviveButton;
         [SerializeField, HideInInspector] private Button _leaveButton;
         [SerializeField, HideInInspector] private TMP_Text _costText;
+        [SerializeField, HideInInspector] private TMP_Text _cashText;
+        [SerializeField, HideInInspector] private TMP_Text _coinText;
 
         public event Action Revive;
         public event Action Leave;
-
-        private void Awake() => gameObject.SetActive(false);
 
         private void OnEnable()
         {
@@ -29,9 +29,11 @@ namespace FortuneWheel
             if (_leaveButton != null) _leaveButton.onClick.RemoveListener(RaiseLeave);
         }
 
-        public void Show(int cost, bool canAfford)
+        public void Show(int cost, bool canAfford, int cash, int coin)
         {
             if (_costText != null) _costText.text = cost.ToString("N0");
+            if (_cashText != null) _cashText.text = cash.ToString("N0");
+            if (_coinText != null) _coinText.text = coin.ToString("N0");
             if (_reviveButton != null) _reviveButton.interactable = canAfford;
             gameObject.SetActive(true);
         }
@@ -47,10 +49,14 @@ namespace FortuneWheel
             foreach (Button b in GetComponentsInChildren<Button>(true))
             {
                 if (b.name == "ui_button_revive") _reviveButton = b;
-                else if (b.name == "ui_button_leave") _leaveButton = b;
+                else if (b.name == "ui_button_leave" || b.name == "ui_button_giveup") _leaveButton = b;
             }
             foreach (TMP_Text t in GetComponentsInChildren<TMP_Text>(true))
+            {
                 if (t.name == "ui_text_revive_cost_value") _costText = t;
+                else if (t.name == "ui_text_fail_cash_value") _cashText = t;
+                else if (t.name == "ui_text_fail_coin_value") _coinText = t;
+            }
         }
 #endif
     }

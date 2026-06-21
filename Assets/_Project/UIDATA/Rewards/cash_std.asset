@@ -16,4 +16,4 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 92af89a97d0d44dd59d3e2e0c1b6225f, type: 3}
   _kind: 1
   _minAmount: 100
-  _maxAmount: 35000
+  _maxAmount: 1000

@@ -32,5 +32,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 701fd5b9ed9684670bd24d8c83321162, type: 2}
   - {fileID: 11400000, guid: d12c6014e59604440a15afb227891d4c, type: 2}
   - {fileID: 11400000, guid: 708d66ea9ebe14cc5a8b15df4f3341e7, type: 2}
+  _amountMultiplier: 3
   _hasBomb: 0
   _bombReward: {fileID: 0}

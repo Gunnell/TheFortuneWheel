@@ -19,7 +19,7 @@ namespace FortuneWheel
 
     public class WheelGenerator
     {
-        public List<WheelSlice> Generate(WheelData wheel, int zone, float growthPerZone, Random random)
+        public List<WheelSlice> Generate(WheelData wheel, int zone, float growthPerZone, Random random, int avoidBombSlot = -1)
         {
             var pool = new List<RewardData>();
             foreach (RewardData reward in wheel.Pool)
@@ -35,24 +35,26 @@ namespace FortuneWheel
             for (int i = 0; i < WheelData.SlotCount; i++)
             {
                 RewardData reward = pool.Count == 0 ? null : pool[i % pool.Count];
-                int amount = reward != null ? RollAmount(reward, zone, growthPerZone, random) : 0;
+                int amount = reward != null ? RollAmount(reward, zone, growthPerZone, wheel.AmountMultiplier, random) : 0;
                 slices.Add(new WheelSlice(reward, amount, false));
             }
 
             if (wheel.HasBomb && wheel.BombReward != null)
             {
                 int bombSlot = random.Next(WheelData.SlotCount);
+                while (bombSlot == avoidBombSlot && WheelData.SlotCount > 1)
+                    bombSlot = random.Next(WheelData.SlotCount);
                 slices[bombSlot] = new WheelSlice(wheel.BombReward, 0, true);
             }
 
             return slices;
         }
 
-        private static int RollAmount(RewardData reward, int zone, float growthPerZone, Random random)
+        private static int RollAmount(RewardData reward, int zone, float growthPerZone, float multiplier, Random random)
         {
             int hi = Math.Max(reward.MinAmount, reward.MaxAmount);
             int baseRoll = random.Next(reward.MinAmount, hi + 1);
-            double scaled = baseRoll * (1.0 + (zone - 1) * growthPerZone);
+            double scaled = baseRoll * (1.0 + (zone - 1) * growthPerZone) * multiplier;
             return Math.Max(1, (int)Math.Round(scaled));
         }
     }

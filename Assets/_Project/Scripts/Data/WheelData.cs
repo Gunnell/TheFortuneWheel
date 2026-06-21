@@ -14,6 +14,7 @@ namespace FortuneWheel
         [SerializeField] private Sprite _baseSprite;
         [SerializeField] private Sprite _indicatorSprite;
         [SerializeField] private List<RewardData> _pool = new List<RewardData>();
+        [SerializeField] private float _amountMultiplier = 1f;
 
         [Header("Bomb")]
         [SerializeField] private bool _hasBomb = true;
@@ -23,6 +24,7 @@ namespace FortuneWheel
         public Sprite BaseSprite => _baseSprite;
         public Sprite IndicatorSprite => _indicatorSprite;
         public IReadOnlyList<RewardData> Pool => _pool;
+        public float AmountMultiplier => _amountMultiplier;
         public bool HasBomb => _hasBomb;
         public RewardData BombReward => _bombReward;
     }

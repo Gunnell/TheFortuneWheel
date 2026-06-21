@@ -28,5 +28,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46841a7125a6341ecad3c061a64e9fc6, type: 2}
   - {fileID: 11400000, guid: b9a3445d131c44f2b9dc7be66dc793cf, type: 2}
   - {fileID: 11400000, guid: f015dbaf3758e4e45ab39fef47e49173, type: 2}
+  _amountMultiplier: 1.5
   _hasBomb: 0
   _bombReward: {fileID: 0}

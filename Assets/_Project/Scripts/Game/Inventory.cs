@@ -104,6 +104,14 @@ namespace FortuneWheel
             if (amount != null) amount.text = $"x{total}";
         }
 
+        public int HaulAmount(RewardKind kind)
+        {
+            int total = 0;
+            foreach (KeyValuePair<RewardData, int> entry in _haul)
+                if (entry.Key != null && entry.Key.Kind == kind) total += entry.Value;
+            return total;
+        }
+
         public void CollectInto(CurrencyHud hud)
         {
             if (hud != null)
