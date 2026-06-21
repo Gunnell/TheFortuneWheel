@@ -89,20 +89,25 @@ namespace FortuneWheel
 
         private Vector3 ResolveDestination(RectTransform row)
         {
-            if (_scroll == null) return row.position;
+            if (_scroll == null || _content == null) return row.position;
 
             Canvas.ForceUpdateCanvases();
-            float previous = _scroll.verticalNormalizedPosition;
+            _scroll.DOKill();
 
+            RectTransform viewport = _scroll.viewport != null ? _scroll.viewport : _content.parent as RectTransform;
+            bool scrollable = viewport != null && _content.rect.height > viewport.rect.height + 1f;
+            if (!scrollable) return row.position;
+
+            float previous = _scroll.verticalNormalizedPosition;
             _scroll.verticalNormalizedPosition = 0f;
             Canvas.ForceUpdateCanvases();
             Vector3 destination = row.position;
 
             _scroll.verticalNormalizedPosition = previous;
-            _scroll.DOKill();
             DOTween.To(() => _scroll.verticalNormalizedPosition,
                        v => _scroll.verticalNormalizedPosition = v, 0f, _scrollDuration)
-                   .SetEase(Ease.OutCubic);
+                   .SetEase(Ease.OutCubic)
+                   .SetTarget(_scroll);
 
             return destination;
         }
