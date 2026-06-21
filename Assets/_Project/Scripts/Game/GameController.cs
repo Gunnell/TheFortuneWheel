@@ -16,7 +16,7 @@ namespace FortuneWheel
         [SerializeField] private WheelData _superWheel;
         [SerializeField] private float _advanceDelay = 0.6f;
         [SerializeField] private float _restartDelay = 1f;
-        [SerializeField] private int _baseReviveCost = 50;
+        [SerializeField] private int _baseReviveCost = 25;
         [SerializeField] private ZoneBar _zoneBar;
 
         private int _zone = 1;

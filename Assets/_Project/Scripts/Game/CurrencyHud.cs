@@ -8,6 +8,8 @@ namespace FortuneWheel
     {
         [SerializeField, HideInInspector] private TMP_Text _cashText;
         [SerializeField, HideInInspector] private TMP_Text _coinText;
+        [SerializeField] private int _startingCash;
+        [SerializeField] private int _startingCoin = 100;
 
         private int _cash;
         private int _coin;
@@ -15,7 +17,12 @@ namespace FortuneWheel
         public int Cash => _cash;
         public int Coin => _coin;
 
-        private void Awake() => Refresh();
+        private void Awake()
+        {
+            _cash = _startingCash;
+            _coin = _startingCoin;
+            Refresh();
+        }
 
         public void Add(RewardKind kind, int amount)
         {
