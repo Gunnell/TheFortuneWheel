@@ -17,12 +17,15 @@ namespace FortuneWheel
         [SerializeField] private float _popDuration = 0.3f;
         [SerializeField] private float _holdDuration = 0.3f;
         [SerializeField] private float _flyDuration = 0.5f;
+        [SerializeField] private float _scrollDuration = 0.4f;
+        [SerializeField, HideInInspector] private ScrollRect _scroll;
 
         private readonly Dictionary<RewardData, int> _haul = new Dictionary<RewardData, int>();
         private readonly Dictionary<RewardData, RectTransform> _rows = new Dictionary<RewardData, RectTransform>();
 
         private void OnEnable()
         {
+            if (_scroll == null) _scroll = GetComponentInParent<ScrollRect>();
             if (_wheel != null) _wheel.Landed += OnLanded;
         }
 
@@ -59,7 +62,7 @@ namespace FortuneWheel
                 rowGroup.alpha = 0f;
             }
 
-            Vector3 destination = row.position;
+            Vector3 destination = ResolveDestination(row);
 
             Transform visual = slot.IconTransform.parent;
             GameObject ghostGo = Instantiate(visual.gameObject, visual.parent);
@@ -82,6 +85,26 @@ namespace FortuneWheel
                 SetRowAmount(row, newTotal);
                 if (rowGroup != null) rowGroup.alpha = 1f;
             });
+        }
+
+        private Vector3 ResolveDestination(RectTransform row)
+        {
+            if (_scroll == null) return row.position;
+
+            Canvas.ForceUpdateCanvases();
+            float previous = _scroll.verticalNormalizedPosition;
+
+            _scroll.verticalNormalizedPosition = 0f;
+            Canvas.ForceUpdateCanvases();
+            Vector3 destination = row.position;
+
+            _scroll.verticalNormalizedPosition = previous;
+            _scroll.DOKill();
+            DOTween.To(() => _scroll.verticalNormalizedPosition,
+                       v => _scroll.verticalNormalizedPosition = v, 0f, _scrollDuration)
+                   .SetEase(Ease.OutCubic);
+
+            return destination;
         }
 
         private RectTransform GetOrCreateRow(RewardData reward)
@@ -138,6 +161,7 @@ namespace FortuneWheel
             if (_content == null) _content = transform as RectTransform;
             if (_wheel == null) _wheel = FindObjectOfType<WheelView>();
             if (_canvas == null) _canvas = GetComponentInParent<Canvas>();
+            if (_scroll == null) _scroll = GetComponent<ScrollRect>();
         }
 #endif
     }
